@@ -1,0 +1,38 @@
+﻿@model Travel_V1.Models.FlightViewModel
+@{
+    ViewData["Title"] = "MatchedFlights";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <img src="~/images/cancun.jpg" alt="cancun" width=100% />
+        </div>
+        <div class="col-8">
+            @foreach(var item in Model.Flights)
+            {
+                <table class="table bg-light text-black-50 table-borderless rounded">
+                    <tbody>
+                        <tr>
+                            <td class="text-left m-0" scope="row"><b>@Html.DisplayFor(model => item.DepartureTime) - @Html.DisplayFor(model => item.ArrivalTime)</b></td>
+                            <td class="text-left m-0">@Html.DisplayFor(model => item.Duration)</td>
+                            <td class="text-right m-0"><h4>$@Html.DisplayFor(model => item.Price)</h4></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">@Html.DisplayFor(model => item.DepartureAirport) - @Html.DisplayFor(model => item.ArrivalAirport)</td>
+                            <td class="text-left">@Html.DisplayFor(model => item.Cabin)</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">@Html.DisplayFor(model => item.Airline)</td>
+                            <td class="text-left m-0"></td>
+                            <td class="text-right m-auto"><a asp-action="PaymentInfo" asp-route-id="@item.Id" class="btn btn-primary">Select</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+@await Html.PartialAsync("_Footer")
+
